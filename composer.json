@@ -1,0 +1,18 @@
+{
+  "name": "zyncro/framework",
+  "type": "library",
+  "description": "Zyncro Framework",
+  "keywords": [],
+  "homepage": "http://zyncro.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Luis Mas Serral",
+      "email": "luis.mas.serral@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {"Zyncro\\Framework\\": ""}
+  },
+  "target-dir": "Zyncro/Framework"
+}
