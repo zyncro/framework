@@ -79,7 +79,7 @@ This is an example of how to create the database for a ZyncroApp called <options
             if (!$result) {
                 $output->writeln('<error>There was and error using MySQL with username "' . $mysqlUser . '" and password "' . $mysqlPassword . '"</error>');
             } else {
-                $written = $this->writeConfigYmlFile($configFilePath, strtolower($namespace), $result);
+                $written = $this->writeConfigYmlFile($configFilePath, strtolower($namespace), $result, $mysqlHost);
 
                 if ($written) {
                     $output->writeln('<info>Database and user created successfully. All the parameters are in the "config.yml" file.</info>');
@@ -126,11 +126,11 @@ This is an example of how to create the database for a ZyncroApp called <options
         return implode($pass);
     }
 
-    private function writeConfigYmlFile($filePath, $namespace, $password)
+    private function writeConfigYmlFile($filePath, $namespace, $password, $mysqlHost)
     {
         $content = 'database:' . PHP_EOL .
             '  driver: pdo_mysql' . PHP_EOL .
-            '  host: localhost' . PHP_EOL .
+            '  host: ' . $mysqlHost . PHP_EOL .
             '  user: ' . $namespace . PHP_EOL .
             '  password: ' . $password . PHP_EOL .
             '  dbname: ' . $namespace;
