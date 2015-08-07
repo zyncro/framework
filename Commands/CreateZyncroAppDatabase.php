@@ -44,6 +44,12 @@ This is an example of how to create the database for a ZyncroApp called <options
             $question = new Question('<info>Password for the MySQL user: </info>');
             $mysqlPassword = $helper->ask($input, $output, $question);
 
+            $question = new Question('<info>Host of the MySQL server (localhost by default): </info>');
+            $mysqlHost = $helper->ask($input, $output, $question, 'localhost');
+
+            $question = new Question('<info>Port of the MySQL server (3306 by default): </info>');
+            $mysqlPort = $helper->ask($input, $output, $question, '3306');
+
             if (!is_dir($appFolder) || !is_file($configFilePath)) {
                 $output->writeln('<error>ZyncroApp with namespace ' . $args['namespace'] . ' is not found or doesn\'t have a config.yml file</error>');
 
@@ -56,7 +62,7 @@ This is an example of how to create the database for a ZyncroApp called <options
                 exit;
             }
 
-            $result = $this->createDatabaseAndUser(strtolower($namespace), $mysqlUser, $mysqlPassword);
+            $result = $this->createDatabaseAndUser(strtolower($namespace), $mysqlUser, $mysqlPassword, $mysqlHost, $mysqlPort);
 
             if (!$result) {
                 $output->writeln('<error>There was and error using MySQL with username "' . $mysqlUser . '" and password "' . $mysqlPassword . '"</error>');
@@ -72,13 +78,13 @@ This is an example of how to create the database for a ZyncroApp called <options
         };
     }
 
-    private function createDatabaseAndUser($namespace, $mysqlUser, $mysqlPassword)
+    private function createDatabaseAndUser($namespace, $mysqlUser, $mysqlPassword, $mysqlHost, $mysqlPort)
     {
         $password = $this->generateRandomPassword();
 
-        $dbCreateCommand = "mysql -u $mysqlUser -p$mysqlPassword -e 'CREATE DATABASE $namespace;' 2> /dev/null";
-        $userCreateCommand = "mysql -u $mysqlUser -p$mysqlPassword -e \"CREATE USER '$namespace'@'localhost' IDENTIFIED BY '$password';\" 2> /dev/null";
-        $grantCommand = "mysql -u $mysqlUser -p$mysqlPassword -e \"GRANT ALL PRIVILEGES ON $namespace.* TO '$namespace'@'localhost';\" 2> /dev/null";
+        $dbCreateCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e 'CREATE DATABASE $namespace;' 2> /dev/null";
+        $userCreateCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"CREATE USER '$namespace'@'localhost' IDENTIFIED BY '$password';\" 2> /dev/null";
+        $grantCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"GRANT ALL PRIVILEGES ON $namespace.* TO '$namespace'@'localhost';\" 2> /dev/null";
 
         $results = array();
         $return1 = $return2 = $return3 = null;
