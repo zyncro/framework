@@ -1,0 +1,7 @@
+oauth:
+  host: http://devtools2.zyncro.net:8081/zyncro-server-api/
+  grant_type_login: password
+  grant_type_refresh: refresh_token
+  scope: trust
+  client_id: zyncro-test
+  client_secret: zyncro123456
