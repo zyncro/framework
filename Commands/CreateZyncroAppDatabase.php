@@ -44,11 +44,11 @@ This is an example of how to create the database for a ZyncroApp called <options
             $question = new Question('<info>Password for the MySQL user: </info>');
             $mysqlPassword = $helper->ask($input, $output, $question);
 
-            $question = new Question('<info>Host of the MySQL server (localhost by default): </info>');
-            $mysqlHost = $helper->ask($input, $output, $question, 'localhost');
+            $question = new Question('<info>Host of the MySQL server: </info>');
+            $mysqlHost = $helper->ask($input, $output, $question);
 
-            $question = new Question('<info>Port of the MySQL server (3306 by default): </info>');
-            $mysqlPort = $helper->ask($input, $output, $question, '3306');
+            $question = new Question('<info>Port of the MySQL server: </info>');
+            $mysqlPort = $helper->ask($input, $output, $question);
 
             if (!is_dir($appFolder) || !is_file($configFilePath)) {
                 $output->writeln('<error>ZyncroApp with namespace ' . $args['namespace'] . ' is not found or doesn\'t have a config.yml file</error>');
@@ -58,6 +58,18 @@ This is an example of how to create the database for a ZyncroApp called <options
 
             if (!$mysqlUser) {
                 $output->writeln('<error>You must provide a MySQL user</error>');
+
+                exit;
+            }
+
+            if (!$mysqlHost) {
+                $output->writeln('<error>You must provide a MySQL host</error>');
+
+                exit;
+            }
+
+            if (!$mysqlPort) {
+                $output->writeln('<error>You must provide a MySQL port</error>');
 
                 exit;
             }
