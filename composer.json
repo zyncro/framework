@@ -1,14 +1,19 @@
 {
   "name": "zyncro/framework",
-  "description": "PHP Framework for developing ZyncroApps",
   "type": "library",
+  "description": "Zyncro Framework",
+  "keywords": [],
+  "homepage": "http://zyncro.com",
   "license": "MIT",
-  "require": {
-    "zyncro/framework": "1.0.*"
-  },
-  "autoload": {
-    "psr-0": {
-      "": "src/"
+  "authors": [
+    {
+      "name": "Luis Mas Serral",
+      "email": "luis.mas.serral@gmail.com"
     }
-  }
+  ],
+  "autoload": {
+    "psr-0": {"Zyncro\\Framework\\": ""}
+  },
+  "minimum-stability": "dev",
+  "target-dir": "Zyncro/Framework"
 }
