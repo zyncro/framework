@@ -95,8 +95,8 @@ This is an example of how to create the database for a ZyncroApp called <options
         $password = $this->generateRandomPassword();
 
         $dbCreateCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e 'CREATE DATABASE $namespace;' 2> /dev/null";
-        $userCreateCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"CREATE USER '$namespace'@'localhost' IDENTIFIED BY '$password';\" 2> /dev/null";
-        $grantCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"GRANT ALL PRIVILEGES ON $namespace.* TO '$namespace'@'localhost';\" 2> /dev/null";
+        $userCreateCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"CREATE USER '$namespace'@'%' IDENTIFIED BY '$password';\" 2> /dev/null";
+        $grantCommand = "mysql -h $mysqlHost -P $mysqlPort -u $mysqlUser -p$mysqlPassword -e \"GRANT ALL PRIVILEGES ON $namespace.* TO '$namespace'@'%';\" 2> /dev/null";
 
         $results = array();
         $return1 = $return2 = $return3 = null;
