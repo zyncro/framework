@@ -1,6 +1,6 @@
 {
   "require": {
-    "zyncro/framework": "0.2.1"
+    "zyncro/framework": "1.0.*"
   },
   "autoload": {
     "psr-0": {
