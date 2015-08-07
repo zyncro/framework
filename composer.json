@@ -1,4 +1,8 @@
 {
+  "name": "zyncro/framework",
+  "description": "PHP Framework for developing ZyncroApps",
+  "type": "library",
+  "license": "MIT",
   "require": {
     "zyncro/framework": "1.0.*"
   },
